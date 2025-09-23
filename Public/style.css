@@ -479,9 +479,16 @@ textarea {
 
 /* Mobile (≤768px) */
 @media screen and (max-width: 768px) {
-  .homeL {
-    font-size: 1.2rem;
+  .homeL{
+    text-align: center;
+    align-content: center;
+    margin-left: -10px;
+    margin-top: 10px;
   }
+.homeL h4,
+.homeL p {
+    font-size: 1.2rem;
+}
 
   .homeR img {
     width: 80vw;
