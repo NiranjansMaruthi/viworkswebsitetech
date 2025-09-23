@@ -1,0 +1,734 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#icon{
+  fill: blue;
+}
+
+
+
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  height: 10vh;               /* responsive height */
+  background: #faf8f8;        
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1%;
+  margin-right: 10px;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position:static;
+}
+
+
+/*Logo part*/
+.logo{
+  display: flex;
+  gap: 10px;
+}
+.logo img{
+  width: 50px;
+  filter: invert(29%) sepia(94%) saturate(7483%) hue-rotate(202deg) brightness(115%) contrast(102%);
+}
+.logo h5{
+  font-size: 40px;
+  font-family:  sans-serif;
+}
+
+/*Navbar link's*/
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin-right: 10px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-size: 1.6rem;
+  transition: color 0.3s;
+  font-family:  sans-serif;
+ 
+}
+
+.nav-links a:hover {
+  color: #5329b3 ;
+   text-shadow: 2px 2px 5px #251154; /* x y blur color */
+}
+
+/* Hamburger Menu (hidden by default) */
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  color: #000000; /* hamburger thing*/
+  cursor: pointer;
+}
+
+/* loader*/
+
+ /* Full-screen loader */
+.loader {
+    position: fixed; /* cover entire viewport */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: white; /* or any color you like */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* on top of everything */
+}
+
+/* Loader animation (optional) */
+.loader::after {
+    content: "";
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc;
+    border-top-color: #1d72b8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Hide content initially */
+#content {
+    display: none;
+}
+
+/*Show offline message*/
+.offline-msg{
+  display: grid;
+  position: fixed;   /* stays in the center even if page scrolls */
+  top: 75%;
+  left: 50%;
+  font-size: 1.7rem;
+}
+
+/*Body  Content Part */
+.content{
+  width: 100%;
+  margin: 0 auto;   /* center it */
+}
+/* Home */
+.Home{
+  width: 100%;
+  height: 90vh;
+  background: linear-gradient(135deg, #6e30ff 0%, #9086b0 100%);
+  align-items: center;
+  display: flex;
+  background-size: 200% 200%;   /* make it bigger so it can move */
+  gap: 390px;
+    animation: gradientMove 6s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.homeL{
+  margin-top: -40px;
+  margin-left: 70px;
+}
+.homeL h4{
+ font-size: 4.2rem;
+ color: rgb(255, 255, 255);
+}
+.homeL h4 span{
+  color: rgb(227, 227, 21);
+}
+.homeL p{
+  font-size: 1.9rem;
+  color: white;
+  padding-top: 10px;
+}
+.homeR img{
+  width: 400px;
+  border-radius: 10%;
+  margin-top: -20px;
+}
+/*Services*/
+.server{
+  width: 100%;
+  height: 80vh;
+}
+.tut{
+  justify-content: center;
+  align-items: center;
+ text-align: center;
+ margin-top: 60px;
+}
+.tut h3{
+  font-size: 3rem;
+   font-family:  sans-serif;
+
+}
+.tut p{
+  font-size: 1.5rem;
+  margin-top: 10px;
+  color: rgb(79, 79, 79);
+   font-family:  sans-serif;
+}
+/* box's */
+.huh{
+  width: 20%;
+  height: 50vh;
+  background-color: grey;
+  border-radius: 10%;
+  
+}
+
+.ert{
+  background-color: rgb(59 130 246 / 0.1);
+}
+
+/*Services I Offer Content & Box's*/
+/* Service Section */
+         .Service-part{
+          text-align: center;
+          margin-top: 50px;
+         }
+         /* Service Section */
+         .Service-title{
+          font-size: 36px;
+         }
+         /* Service Section */
+         .Service-description{
+          font-size: 20px;
+          color: #475569;
+          line-height: 1.5;
+          margin-bottom: 30px;
+        }
+         /* Service Section using grid to display services in one row */
+        .Service-grid{
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+          gap: 20px;
+          width: 80%;
+          margin: auto;
+          margin-left: 220px;
+        }
+        /* Service Card */
+        .Service-card {
+          background: rgb(255, 255, 255);
+          border-radius: 12px;
+          height: auto;
+          width: 100%;
+          width: 85%;
+          padding-left: 50px;
+          padding-right: 20px;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          transition: 0.3s ease;
+          box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+          transition: transform 0.18s ease, box-shadow 0.18s ease;
+
+        }
+        /* Icons inside service card */
+       .fa-solid.fa-code{
+        background-color: lightblue;
+        padding: 20px;
+        border-radius: 8px;
+        font-size: 30px;
+        color: blue;
+       }
+       .fa-solid.fa-robot{
+        background-color: rgb(255, 159, 255);
+        padding: 20px;
+        border-radius: 8px;
+        font-size: 30px;
+        color: purple;
+       }
+       .fa-solid.fa-chart-line{
+        background-color: rgb(255, 223, 186);
+        padding: 20px;
+        border-radius: 8px;
+        font-size: 30px;
+        color: orange;
+       }
+       .fa-solid.fa-cogs{
+        background-color: lightgreen;
+        padding: 20px;
+        border-radius: 8px;
+        font-size: 30px;
+        color: green;
+
+       }
+       /* Hover effect on service card */
+        .Service-card:hover {
+          box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+          transform: translateY(-6px);
+        }
+        /* Card Header and Info inside service card */
+        .Card-header { 
+        color: #1E293B;
+        font-size: 20px;
+        margin-top: 16px;
+        margin-bottom: 12px;
+        }
+        .Card-info{  
+          color: #475569; 
+          line-height: 1.5;
+          font-size: 16px;
+          width: 100%;
+          width: 70%;
+          margin-bottom: 12px;
+         }
+         /* Features inside service card & tick icon*/
+         .fa-solid.fa-check{
+          color: green;
+         }
+         .Card-info-features{
+          color: #64748B;
+          line-height: 1.5;
+          font-size: 14px;
+          }
+
+/*Contact*/
+
+.Title{
+  text-align: center;
+  color: #1e293b;
+  margin-top: 150px;
+}
+.Brief{
+  text-align: center;
+  color: #475569;
+  font-size: 20px;
+}
+/* Flex container for Contact and Service */
+.main-flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+/* Contact Container */
+.Contact-Cointainer {
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px 24px;
+  max-width: 500px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Service Container */
+.Service-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+  padding: 32px 24px;
+  max-width: 500px;
+  width: 100%;
+  margin-left: 80px;
+}
+
+/* Header */
+.header {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #1e293b;
+  text-align: left;
+}
+
+/* Contact Info Styles */
+.contact-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.icon-bg {
+  background-color: rgb(59 130 246 / 0.2);
+  color: #3B82F6;
+  border-radius: 5px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-right: 12px;
+}
+.contact-label {
+  font-weight: 600;
+  color: #334155;
+  margin-right:0px;
+  min-width: 80px;
+}
+.contact-value {
+  color: #475569;
+  font-weight: normal;
+  margin-left: 10px;
+}
+
+/* Image Styling */
+.rounded-xl.shadow-lg.w-full.h-auto {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  margin-top: 24px;
+}
+
+/* Service Form Styles */
+form {
+  width: 100%;
+}
+.names-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-bottom: 16px;
+}
+label {
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+input, textarea {
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f1f5f9;
+  color: #334155;
+}
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+.Submit-btn {
+  width: 100%;
+  padding: 12px 0;
+  background: #3e1df8;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+}
+.Submit-btn:hover {
+  background: #312e81;
+}
+
+ 
+
+
+
+/* Responsive Code */
+/*  Responsive Breakpoints */
+/*Responsive size for Tabletscreen size (600 - 1024 ) */ 
+/*Responsive size for Tabletscreen size (320px - 600px) */ 
+/* Tablet (≤1024px) */
+@media screen and (max-width: 1024px) {
+  .Home {
+    flex-direction: column;   /* stack left + right */
+    gap: 2rem;
+    height: auto;
+    padding: 2rem 1rem;
+  }
+
+  .homeL {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .homeR img {
+    width: 60vw;
+    height: auto;
+  }
+}
+
+/* Mobile (≤768px) */
+@media screen and (max-width: 768px) {
+  .homeL {
+    font-size: 1.2rem;
+  }
+
+  .homeR img {
+    width: 80vw;
+  }
+}
+/* Mobile (≤768px) */
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: block; /* show hamburger */
+  }
+
+  .nav-links {
+    display: none; /* hide links by default */
+    flex-direction: column;
+    gap: 1.5rem;
+    position: absolute;
+    top: 21%;               /* vertically center */
+    left: 50%;              /* horizontally center */
+    transform: translate(-50%, -50%); /* true centering */
+    width: 80%;
+    background: #faf8f8;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 100;
+  }
+
+  .nav-links.show {
+    display: flex; /* show when toggled */
+  }
+
+  .nav-links a{
+    font-size: 1.2rem;
+  }
+}
+
+
+/*Service Part - Stack vertically, wider containers */
+/*For Laptops 1024px to 1440px*/
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .Service-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 80%;
+    margin: auto;
+    gap: 20px;
+  }
+  .Service-card {
+    width: 75%;
+    padding-left: 50px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 0 auto;
+  }
+  .Service-title {
+    font-size: 36px;
+  }
+  .Service-description {
+    font-size: 20px;
+  }
+  .Card-header {
+    font-size: 20px;
+  }
+  .Card-info {
+    font-size: 16px;
+    width: 70%;
+  }
+  .Card-info-features {
+    font-size: 14px;
+  }
+  .fa-solid {
+    font-size: 30px;
+    padding: 20px;
+  }
+}
+/* End of service part responsive code 1024px to 1440px */
+/*Contact Part Responsive Code*/
+/* 1024px to 1440px: Two columns, moderate width */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .main-flex-container {
+    gap: 32px;
+    padding: 32px 16px;
+  }
+  .Contact-Cointainer,
+  .Service-container {
+    max-width: 480px;
+    padding: 24px 16px;
+  }
+}
+/*Responsive size for Tabletscreen size (600 - 1024 ) */ 
+/* Service Part - Stack vertically, wider containers */
+/*For Tablets 660px to 1024px*/
+
+@media (min-width: 661px) and (max-width: 1024px) {
+  .Service-grid {
+    grid-template-columns: 1fr 1fr;
+    width: 90%;
+    margin: 0 auto;
+    gap: 20px;
+  }
+  .Service-card {
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    margin: 0 auto;
+  }
+  .Service-title {
+    font-size: 32px;
+  }
+  .Service-description {
+    font-size: 18px;
+  }
+  .Card-header {
+    font-size: 19px;
+  }
+  .Card-info {
+    font-size: 15px;
+    width: 90%;
+  }
+  .Card-info-features {
+    font-size: 13.5px;
+  }
+  .fa-solid {
+    font-size: 28px ;
+    padding: 16px;
+  }
+}
+/* End of service part responsive code 660px to 1024px */
+/* Contact Part - Stack vertically, wider containers */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .main-flex-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 8px;
+  }
+  .Contact-Cointainer,
+  .Service-container {
+    width: 90vw;
+    max-width: 700px;
+    min-width: 250px;
+    padding: 20px 10px;
+  }
+  .Contact-Cointainer img{
+    width: auto;
+  }
+  .names-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .header {
+    text-align: center;
+  }
+  .rounded-xl.shadow-lg.w-full.h-auto {
+    margin-top: 16px;
+  }
+  .Service-container{
+    margin-right: 95px;
+  }
+}
+/*Responsive size for Tabletscreen size (320px - 600px) */ 
+/* Service Part - Stack vertically, full width */
+/*For Moblies 320px tp 660px*/
+
+@media (max-width: 660px) {
+  .Service-grid {
+    grid-template-columns: 1fr;
+    width: 95%;
+    margin: 0 auto;
+    gap: 16px;
+  }
+  .Service-card {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin: 0 auto;
+  }
+  .Service-title {
+    font-size: 28px;
+  }
+  .Service-description {
+    font-size: 16px;
+  }
+  .Card-header {
+    font-size: 18px;
+  }
+  .Card-info {
+    font-size: 14px;
+    width: 100%;
+  }
+  .Card-info-features {
+    font-size: 13px;
+  }
+  .fa-solid {
+    font-size: 24px;
+    padding: 12px ;
+  }
+}
+/* End of service part responsive code 320px to 660px */
+/* Contact-Part Stack vertically, full width */
+@media (max-width: 599px) {
+  .main-flex-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 2px;
+  }
+  .Contact-Cointainer,
+  .Service-container {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
+    padding: 10px 4px;
+  }
+  .names-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .header {
+    text-align: center;
+  }
+  .rounded-xl.shadow-lg.w-full.h-auto {
+    margin-top: 16px;
+  }
+  .Service-container{
+   width: 90%;
+   max-width: 100%;
+   min-width: 0;
+   padding: 10px 4px;
+   margin-right: 60px;
+  }
+  @media (min-width:320px) and (max-width:600px){
+    .Service-container{
+      margin-right: 80px;
+      padding-left: 10px;
+      padding-right: 10px;
+     
+    }
+    .contact-row{
+      margin-left: 40px;
+    }
+  }
+}
+
