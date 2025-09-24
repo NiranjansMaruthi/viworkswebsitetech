@@ -73,27 +73,27 @@ document.addEventListener("DOMContentLoaded", () => {
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" }
     })
-     .then(async res => {
-    let result;
-    try {
-      result = await res.json(); // try parsing JSON
-    } catch (e) {
-      throw new Error("Server did not return valid JSON");
-    }
+      .then(async res => {
+        let result;
+        try {
+          result = await res.json(); // try parsing JSON
+        } catch (e) {
+          throw new Error("Server did not return valid JSON");
+        }
 
-    if (res.ok && result.status === "success") {
-      alertBox.innerText = "✅ Response submitted!";
-      alertBox.style.color = "green";
-      form.reset();
-    } else {
-      alertBox.innerText = result.message || "❌ Response Failed!";
-      alertBox.style.color = "red";
-    }
-  })
-  .catch(err => {
-    alertBox.innerText = "❌ Failed to submit!";
-    alertBox.style.color = "red";
-    console.error("Fetch error:", err);
+        if (res.ok && result.status === "success") {
+          alertBox.innerText = "✅ Response submitted!";
+          alertBox.style.color = "green";
+          form.reset();
+        } else {
+          alertBox.innerText = result.message || "❌ Response Failed!";
+          alertBox.style.color = "red";
+        }
+      })
+      .catch(err => {
+        alertBox.innerText = "❌ Failed to submit!";
+        alertBox.style.color = "red";
+        console.error("Fetch error:", err);
+      });
   });
-})
-})
+});

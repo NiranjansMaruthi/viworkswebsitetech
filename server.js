@@ -8,7 +8,7 @@ const XLSX = require("xlsx");
 const app = express();
 const PORT = process.env.PORT || 3002;
 
-// Static files (for frontend in "Public" folder)
+// Static files
 app.use(express.static(path.join(__dirname, "Public")));
 app.use(bodyParser.json());
 const upload = multer();
@@ -20,33 +20,27 @@ const excelFile = path.join(__dirname, "Viworks user data.xlsx");
 function saveToExcel(newRow) {
   let workbook, worksheet, data;
 
+  const headers = [
+    "firstName",
+    "lastName",
+    "email",
+    "mobile",
+    "productType",
+    "productDescription",
+    "createdAt",
+  ];
+
   if (fs.existsSync(excelFile)) {
-    // Read existing file
     workbook = XLSX.readFile(excelFile);
     worksheet = workbook.Sheets["Sheet1"];
     data = XLSX.utils.sheet_to_json(worksheet);
-    data.push(newRow); // append new row
+    data.push(newRow);
+    worksheet = XLSX.utils.json_to_sheet(data, { header: headers });
+    workbook.Sheets["Sheet1"] = worksheet;
   } else {
-    // Create new file
     workbook = XLSX.utils.book_new();
     data = [newRow];
-  }
-
-  // Always ensure headers
-  worksheet = XLSX.utils.json_to_sheet(data, {
-    header: [
-      "firstName",
-      "lastName",
-      "email",
-      "mobile",
-      "productType",
-      "productDescription",
-      "createdAt",
-    ],
-  });
-
-  workbook.Sheets["Sheet1"] = worksheet;
-  if (!workbook.SheetNames.includes("Sheet1")) {
+    worksheet = XLSX.utils.json_to_sheet(data, { header: headers });
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
   }
 
@@ -88,9 +82,7 @@ app.post("/submit", upload.none(), async (req, res) => {
       });
     }
 
-    // Save to Excel
     saveToExcel(formData);
-
     console.log("✅ New form submitted:", formData);
 
     res.json({
@@ -109,13 +101,11 @@ app.post("/submit", upload.none(), async (req, res) => {
 
 // API to view Excel data
 app.get("/view-excel", (req, res) => {
-  if (!fs.existsSync(excelFile)) {
-    return res.status(404).send("No Excel file found yet.");
-  }
+  if (!fs.existsSync(excelFile)) return res.json([]);
   const workbook = XLSX.readFile(excelFile);
   const worksheet = workbook.Sheets["Sheet1"];
   const data = XLSX.utils.sheet_to_json(worksheet);
-  res.json(data); // show JSON in browser
+  res.json(data);
 });
 
 // Root
