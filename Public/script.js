@@ -38,62 +38,62 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
 // Form submission
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded",() => {
   const form = document.getElementById("myForm");
   const alertBox = document.querySelector(".alert-text");
-  if (!form || !alertBox) return;
 
-  form.addEventListener("submit", function (e) {
+  if(!form || !alertBox) return;
+
+  form.addEventListener("submit", function(e){
     e.preventDefault();
+
+
     const formData = new FormData(this);
+    const data ={};
+    let emptyFields =[];
 
-    const data = {};
-    let emptyFields = [];
 
-    // Collect data + validate
-    formData.forEach((value, key) => {
-      data[key] = value.trim();
-      if (!value.trim()) emptyFields.push(key);
-    });
-
-    if (emptyFields.length > 0) {
-      alertBox.innerText = `❌ Please fill all required fields: ${emptyFields.join(", ")}`;
-      alertBox.style.color = "red";
-      return;
+//Collect values and check if any field is empty
+ formData.forEach((value,key)=>{
+  data[key] = value.trim()
+    if(!value.trim()){
+      emptyFields.push(key);
     }
+ })
 
-    // Show loading
-    alertBox.innerText = "Submitting...";
-    alertBox.style.color = "blue";
 
-    // Send to server
-    fetch("/submit", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" }
+  // validation check if filed are empty if any filed is empty
+     if (emptyFields.length > 0) {
+    alertBox.textContent ="❌ Please fill in all inputs before submitting ";
+    alertBox.style.color="red";
+    return;    //stop form from submitting
+  }
+
+
+
+//fetch to Google Apps Script
+    fetch(
+      "https://script.google.com/macros/s/AKfycbxM7R8Ux1JxK2sCWzBJqv1Lb8SUp0FnD9xdnSldN3gNkuUGA0Iq2bRnHiUUJvyQoefmRg/exec",
+    {
+      method:"POST",
+      body:JSON.stringify(data),
+      headers: {"Content-Type":"application/json",},
+      body:JSON.stringify(data)
     })
-      .then(async res => {
-        let result;
-        try {
-          result = await res.json(); // try parsing JSON
-        } catch (e) {
-          throw new Error("Server did not return valid JSON");
-        }
 
-        if (res.ok && result.status === "success") {
-          alertBox.innerText = "✅ Response submitted!";
-          alertBox.style.color = "green";
-          form.reset();
-        } else {
-          alertBox.innerText = result.message || "❌ Response Failed!";
-          alertBox.style.color = "red";
-        }
-      })
-      .catch(err => {
-        alertBox.innerText = "❌ Failed to submit!";
-        alertBox.style.color = "red";
-        console.error("Fetch error:", err);
-      });
+    .then((res)=> res.json())
+    .then((response) => {
+      console.log("Successs:",response);
+      alertBox.textContent="✅ Form submitted successfully";
+      alertBox.style.color ="green";
+      form.reset();// clear form after success
+    })
+    .catch((error) => {
+      console.error("Error:",error);
+      alertBox.textContent ="❌ Something went worng. Please try agian.";
+      alertBox.style.color ="red";
+    });
   });
-});
+})
