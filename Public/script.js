@@ -40,60 +40,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // Form submission
-document.addEventListener("DOMContentLoaded",() => {
+document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("myForm");
   const alertBox = document.querySelector(".alert-text");
 
-  if(!form || !alertBox) return;
+  if (!form || !alertBox) return;
 
-  form.addEventListener("submit", function(e){
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const data = {
+      firstName: document.getElementById("first-name").value.trim(),
+      lastName: document.getElementById("last-name").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      mobile: document.getElementById("phone").value.trim(),
+      productType: document.getElementById("service").value.trim(),
+      productDescription: document.getElementById("project-details").value.trim()
+    };
 
-    const formData = new FormData(this);
-    const data ={};
-    let emptyFields =[];
-
-
-//Collect values and check if any field is empty
- formData.forEach((value,key)=>{
-  data[key] = value.trim()
-    if(!value.trim()){
-      emptyFields.push(key);
+    // Check empty fields
+    const emptyFields = Object.entries(data).filter(([k, v]) => !v);
+    if (emptyFields.length > 0) {
+      alertBox.textContent = "❌ Please fill in all inputs before submitting";
+      alertBox.style.color = "red";
+      return;
     }
- })
 
+    alertBox.textContent = "⏳ Submitting...";
+    alertBox.style.color = "blue";
 
-  // validation check if filed are empty if any filed is empty
-     if (emptyFields.length > 0) {
-    alertBox.textContent ="❌ Please fill in all inputs before submitting ";
-    alertBox.style.color="red";
-    return;    //stop form from submitting
-  }
+    try {
+      const res = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
 
+      const text = await res.text();
+      let response;
+      try {
+        response = JSON.parse(text);
+      } catch {
+        response = text;
+      }
 
-
-//fetch to Google Apps Script
-    fetch(
-      "https://script.google.com/macros/s/AKfycbxM7R8Ux1JxK2sCWzBJqv1Lb8SUp0FnD9xdnSldN3gNkuUGA0Iq2bRnHiUUJvyQoefmRg/exec",
-    {
-      method:"POST",
-      body:JSON.stringify(data),
-      headers: {"Content-Type":"application/json",},
-      body:JSON.stringify(data)
-    })
-
-    .then((res)=> res.json())
-    .then((response) => {
-      console.log("Successs:",response);
-      alertBox.textContent="✅ Form submitted successfully";
-      alertBox.style.color ="green";
-      form.reset();// clear form after success
-    })
-    .catch((error) => {
-      console.error("Error:",error);
-      alertBox.textContent ="❌ Something went worng. Please try agian.";
-      alertBox.style.color ="red";
-    });
+      console.log("Response:", response);
+      alertBox.textContent = "✅ Form submitted successfully!";
+      alertBox.style.color = "green";
+      form.reset();
+    } catch (err) {
+      console.error("Error:", err);
+      alertBox.textContent = "❌ Something went wrong. Please try again.";
+      alertBox.style.color = "red";
+    }
   });
-})
+});
